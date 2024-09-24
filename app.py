@@ -5,7 +5,8 @@ import streamlit as st
 from transformers import pipeline
 
 # Load the summarization model
-summarizer = pipeline("summarization", model="sshleifer/distilbart-cnn-12-6")  # smaller version of the model
+#summarizer = pipeline("summarization", model="sshleifer/distilbart-cnn-12-6")  # smaller version of the model
+summarizer = pipeline("summarization", model="facebook/bart-large-cnn")
 
 # Default article text
 DEFAULT_ARTICLE = """ New York (CNN)When Liana Barrientos was 23 years old, she got married in Westchester County, New York.
