@@ -8,7 +8,7 @@ from transformers import pipeline
 #summarizer = pipeline("summarization", model="facebook/bart-large-cnn")
 summarizer = pipeline("summarization", model="sshleifer/distilbart-cnn-12-6") #smaller version of the model
 
-ARTICLE = """ New York (CNN)When Liana Barrientos was 23 years old, she got married in Westchester County, New York.
+DEFAULT_ARTICLE = """ New York (CNN)When Liana Barrientos was 23 years old, she got married in Westchester County, New York.
 A year later, she got married again in Westchester County, but to a different man and without divorcing her first husband.
 Only 18 days after that marriage, she got hitched yet again. Then, Barrientos declared "I do" five more times, sometimes only within two weeks of each other.
 In 2010, she married once more, this time in the Bronx. In an application for a marriage license, she stated it was her "first and only" marriage.
@@ -27,7 +27,7 @@ Her eighth husband, Rashid Rajput, was deported in 2006 to his native Pakistan a
 If convicted, Barrientos faces up to four years in prison.  Her next court appearance is scheduled for May 18.
 """
 
-ARTICLE = st.sidebar.text_area('Article', DEFAULT_SEQ, height=150)
+ARTICLE = st.sidebar.text_area('Article', DEFAULT_ARTICLE, height=150)
 
 st.write(summarizer(ARTICLE, max_length=130, min_length=30, do_sample=False))
 # [{'summary_text': 'Liana Barrientos, 39, is charged with two counts of "offering a false instrument for filing in the first degree" In total, she has been married 10 times, with nine of her marriages occurring between 1999 and 2002. She is believed to still be married to four men.'}]
