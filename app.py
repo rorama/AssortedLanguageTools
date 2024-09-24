@@ -51,7 +51,7 @@ DEFAULT_SENTIMENT = [
 ]
 
 # Create a text area for user input
-SENTIMENT = st.sidebar.text_area('Enter Article', DEFAULT_SENTIMENT, height=150)
+SENTIMENT = st.sidebar.text_area('Enter Sentiment', DEFAULT_SENTIMENT, height=150)
 
 # Define the summarization function
 def summarize(txt):
@@ -63,7 +63,7 @@ def summarize(txt):
     results = sentiment_pipeline(txt)
     
     # Display the results
-    for i, text in enumerate(texts):
+    for i, text in enumerate(txt):
         st.write(f"Text: {text}")
         st.write(f"Sentiment: {results[i]['label']}, Score: {results[i]['score']:.2f}\n")
 
