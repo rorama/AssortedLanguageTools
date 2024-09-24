@@ -3,6 +3,7 @@
 
 import streamlit as st
 from transformers import pipeline
+import ast
 
 # Load the summarization model
 #summarizer = pipeline("summarization", model="sshleifer/distilbart-cnn-12-6")  # smaller version of the model
@@ -70,6 +71,9 @@ def summarize(txt):
 
 # Create a button and trigger the summarize function when clicked
 if st.sidebar.button('Summarize Sentiment'):
+    #ast.literal_eval() is a function in Python that safely evaluates a string containing a valid Python expression, 
+    #such as lists, dictionaries, tuples, sets, integers, and floats. It parses the string and returns the corresponding 
+    #Python object, without executing any arbitrary code, which makes it safer than using eval().    
     summarize(ast.literal_eval(SENTIMENT)) #convert string to actual list
 else:
     st.warning('👈 Please enter Sentiment!')
