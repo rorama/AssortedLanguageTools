@@ -33,3 +33,43 @@ if st.sidebar.button('Summarize Article'):
     summarize(ARTICLE)
 else:
     st.warning('👈 Please enter Article!')
+
+
+
+#################################
+
+
+# Initialize the sentiment analysis pipeline
+# No model was supplied, defaulted to distilbert-base-uncased-finetuned-sst-2-english
+sentiment_pipeline = pipeline("sentiment-analysis")
+
+# Default article text
+DEFAULT_SENTIMENT = [
+    "I'm so happy today!",
+    "This is the worst experience ever.",
+    "It's a decent product, nothing special."
+]
+
+# Create a text area for user input
+SENTIMENT = st.sidebar.text_area('Enter Article', DEFAULT_SENTIMENT, height=150)
+
+# Define the summarization function
+def summarize(txt):
+    st.write('\n\n')
+    #st.write(txt[:100])  # Display the first 100 characters of the article
+    st.write('--------------------------------------------------------------')
+
+    # Perform Hugging sentiment analysis on multiple texts
+    results = sentiment_pipeline(txt)
+    
+    # Display the results
+    for i, text in enumerate(texts):
+        st.write(f"Text: {text}")
+        st.write(f"Sentiment: {results[i]['label']}, Score: {results[i]['score']:.2f}\n")
+
+
+# Create a button and trigger the summarize function when clicked
+if st.sidebar.button('Summarize Sentiment'):
+    summarize(SENTIMENT)
+else:
+    st.warning('👈 Please enter Sentiment!')
