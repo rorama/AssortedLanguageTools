@@ -17,17 +17,18 @@ Barrientos, now 39, is facing two criminal counts of "offering a false instrumen
 """
 
 # Create a text area for user input
-ARTICLE = st.sidebar.text_area('Article', DEFAULT_ARTICLE, height=150)
+ARTICLE = st.sidebar.text_area('Enter Article', DEFAULT_ARTICLE, height=150)
 
 # Define the summarization function
 def summarize(txt):
+    st-write('\n\n')
     st.write(txt[:100])  # Display the first 100 characters of the article
     st.write('--------------------------------------------------------------')
     summary = summarizer(txt, max_length=130, min_length=30, do_sample=False)
     st.write(summary[0]['summary_text'])
 
 # Create a button and trigger the summarize function when clicked
-if st.sidebar.button('Summarize Text'):
+if st.sidebar.button('Summarize Article'):
     summarize(ARTICLE)
 else:
-    st.warning('👈 Please enter text!')
+    st.warning('👈 Please enter Article!')
