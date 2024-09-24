@@ -8,7 +8,7 @@ from transformers import pipeline
 #summarizer = pipeline("summarization", model="facebook/bart-large-cnn")
 summarizer = pipeline("summarization", model="sshleifer/distilbart-cnn-12-6") #smaller version of the model
 
-#ARTICLE = """ New York (CNN)When Liana Barrientos was 23 years old, she got married in Westchester County, New York.
+ARTICLE = """ New York (CNN)When Liana Barrientos was 23 years old, she got married in Westchester County, New York.
 A year later, she got married again in Westchester County, but to a different man and without divorcing her first husband.
 Only 18 days after that marriage, she got hitched yet again. Then, Barrientos declared "I do" five more times, sometimes only within two weeks of each other.
 In 2010, she married once more, this time in the Bronx. In an application for a marriage license, she stated it was her "first and only" marriage.
