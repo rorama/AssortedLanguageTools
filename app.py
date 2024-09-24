@@ -29,5 +29,13 @@ If convicted, Barrientos faces up to four years in prison.  Her next court appea
 
 ARTICLE = st.sidebar.text_area('Article', DEFAULT_ARTICLE, height=150)
 
-st.write(summarizer(ARTICLE, max_length=130, min_length=30, do_sample=False))
-# [{'summary_text': 'Liana Barrientos, 39, is charged with two counts of "offering a false instrument for filing in the first degree" In total, she has been married 10 times, with nine of her marriages occurring between 1999 and 2002. She is believed to still be married to four men.'}]
+def summarize(txt=ARTICLE):
+    st.write(summarizer(txt, max_length=130, min_length=30, do_sample=False))
+    # [{'summary_text': 'Liana Barrientos, 39, is charged with two counts of "offering a false instrument for filing in the first degree" In total, she has been married 10 times, with nine of her marriages occurring between 1999 and 2002. She is believed to still be married to four men.'}]
+
+
+summarize_text = st.sidebar.button('Summarize Text', on_click=summarize)
+
+if not summarize_text:
+    st.warning('👈 Please enter text!')
+
