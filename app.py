@@ -21,7 +21,7 @@ ARTICLE = st.sidebar.text_area('Enter Article', DEFAULT_ARTICLE, height=150)
 
 # Define the summarization function
 def summarize(txt):
-    st-write('\n\n')
+    st.write('\n\n')
     st.write(txt[:100])  # Display the first 100 characters of the article
     st.write('--------------------------------------------------------------')
     summary = summarizer(txt, max_length=130, min_length=30, do_sample=False)
