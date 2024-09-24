@@ -70,6 +70,6 @@ def summarize(txt):
 
 # Create a button and trigger the summarize function when clicked
 if st.sidebar.button('Summarize Sentiment'):
-    summarize(SENTIMENT)
+    summarize(ast.literal_eval(SENTIMENT)) #convert string to actual list
 else:
     st.warning('👈 Please enter Sentiment!')
