@@ -73,7 +73,7 @@ def summarize(txt):
             st.write(f"Text: {text}")
             st.write(f"Sentiment: {results[i]['label']}, Score: {results[i]['score']:.2f}\n")
     else:
-        st.write(f"Text: {text}")
+        st.write(f"Text: {txt_converted}")
         st.write(f"Sentiment: {results[0]['label']}, Score: {results[0]['score']:.2f}\n")
 
 # Create a button and trigger the summarize function when clicked
