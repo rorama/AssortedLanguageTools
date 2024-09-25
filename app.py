@@ -81,6 +81,6 @@ if st.sidebar.button('Summarize Sentiment'):
     #ast.literal_eval() is a function in Python that safely evaluates a string containing a valid Python expression, 
     #such as lists, dictionaries, tuples, sets, integers, and floats. It parses the string and returns the corresponding 
     #Python object, without executing any arbitrary code, which makes it safer than using eval().    
-    summarize(SENTIMENT)
+    summarize(str(SENTIMENT)) #explicitly change SENTIMENT to string so that even when ypu provide unquoted string, it still works
 else:
     st.warning('👈 Please enter Sentiment!')
