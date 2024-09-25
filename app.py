@@ -45,11 +45,11 @@ else:
 sentiment_pipeline = pipeline("sentiment-analysis")
 
 # Default article text
-DEFAULT_SENTIMENT = [
+DEFAULT_SENTIMENT = "[
     "I'm so happy today!",
     "This is the worst experience ever.",
     "It's a decent product, nothing special."
-]
+]"
 
 # Create a text area for user input
 SENTIMENT = st.sidebar.text_area('Enter Sentiment', DEFAULT_SENTIMENT, height=150)
