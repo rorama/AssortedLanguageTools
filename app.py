@@ -15,14 +15,37 @@ import ast
 generator = pipeline("text-generation", model="EleutherAI/gpt-neo-2.7B")
 
 # Streamlit chat UI
-st.title("GPT-3 Chatbox")
+#st.title("GPT-3 Chatbox")
 
-user_input = st.text_input("You: ", "Hello, how are you?")
+# user_input = st.text_input("You: ", "Hello, how are you?")
 
-if user_input:
-    response = generator(user_input, max_length=100, num_return_sequences=1)[0]['generated_text']
-    st.write(f"GPT-3: {response}")
+# if user_input:
+#     response = generator(user_input, max_length=100, num_return_sequences=1)[0]['generated_text']
+#     st.write(f"GPT-3: {response}")
 
+# Define the summarization function
+def chat(txt):
+    st.write('\n\n')
+    #st.write(txt[:100])  # Display the first 100 characters of the article
+    #st.write('--------------------------------------------------------------')
+    #summary = summarizer(txt, max_length=500, min_length=30, do_sample=False)
+    #st.write(summary[0]['summary_text'])
+    response = generator(txt, max_length=100, num_return_sequences=1)[0]['generated_text']
+    st.write(f"GPT-3: {response}")    
+    
+DEFAULT_CHAT = ""
+# Create a text area for user input
+CHAT = st.sidebar.text_area('Enter Chat (String)', DEFAULT_CHAT, height=150)
+
+# Enable the button only if there is text in the CHAT variable
+if CHAT:
+    if st.sidebar.button('Chat Statement'):
+        # Call your Summarize function here
+        chat(CHAT)  # Directly pass the your
+else:
+    st.sidebar.button('Summarize Statement', disabled=True)
+    st.warning('👈 Please enter Statement!')    
+    
     
 ################ STATEMENT SUMMARIZATION #################
 
