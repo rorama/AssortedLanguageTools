@@ -73,7 +73,8 @@ def summarize(txt):
             st.write(f"Text: {text}")
             st.write(f"Sentiment: {results[i]['label']}, Score: {results[i]['score']:.2f}\n")
     else:
-        st.write(f"Sentiment: {results['label']}, Score: {results['score']:.2f}\n")
+        #st.write(f"Sentiment: {results['label']}, Score: {results['score']:.2f}\n")
+        st.write(results)
 
 # Create a button and trigger the summarize function when clicked
 if st.sidebar.button('Summarize Sentiment'):
