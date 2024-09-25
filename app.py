@@ -18,10 +18,10 @@ summarizer = pipeline("summarization", model="facebook/bart-large-cnn")
 # 2010 marriage license application, according to court documents.
 # """
 
-DEFAULT_ARTICLE = ""
+# DEFAULT_STATEMENT = ""
 
-# Create a text area for user input
-ARTICLE = st.sidebar.text_area('Enter Article (String)', DEFAULT_ARTICLE, height=150)
+# # Create a text area for user input
+# STATEMENT = st.sidebar.text_area('Enter Article (String)', DEFAULT_ARTICLE, height=150)
 
 # Define the summarization function
 def summarize(txt):
@@ -31,11 +31,25 @@ def summarize(txt):
     summary = summarizer(txt, max_length=130, min_length=30, do_sample=False)
     st.write(summary[0]['summary_text'])
 
-# Create a button and trigger the summarize function when clicked
-if st.sidebar.button('Summarize Article'):
-    summarize(ARTICLE)
+DEFAULT_STATEMENT = ""
+# Create a text area for user input
+STATEMENT = st.sidebar.text_area('Enter Statement (String or List of Strings)', DEFAULT_STATEMENT, height=150)
+
+# Enable the button only if there is text in the SENTIMENT variable
+if STATEMENT:
+    if st.sidebar.button('Summarize Statement'):
+        # Call your Summarize function here
+        #st.write(f"Summarizing: {STATEMENT}")
+        summarize(STATEMENT)  # Directly pass the STATEMENT
 else:
-    st.warning('👈 Please enter Article!')
+    st.sidebar.button('Summarize Statement', disabled=True)
+    st.warning('👈 Please enter Statement!')    
+    
+# # Create a button and trigger the summarize function when clicked
+# if st.sidebar.button('Summarize Article'):
+#     summarize(ARTICLE)
+# else:
+#     st.warning('👈 Please enter Article!')
 
 
 
