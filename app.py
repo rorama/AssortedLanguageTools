@@ -8,6 +8,7 @@ import streamlit as st
 from transformers import pipeline
 import ast
 
+st.title("Assorted Language Tools - Orama's")
 
 ################ CHAT BOT #################
 
