@@ -30,7 +30,7 @@ def chat(txt):
     #st.write('--------------------------------------------------------------')
     #summary = summarizer(txt, max_length=500, min_length=30, do_sample=False)
     #st.write(summary[0]['summary_text'])
-    response = generator(txt, max_length=100, num_return_sequences=1)[0]['generated_text']
+    response = generator(txt, max_length=500, num_return_sequences=1)[0]['generated_text']
     st.write(f"GPT-3: {response}")    
     
 DEFAULT_CHAT = ""
