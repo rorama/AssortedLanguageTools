@@ -1,3 +1,6 @@
+# Natural Language Tools
+# Richard Orama - September 2024
+
 #x = st.slider('Select a value')
 #st.write(x, 'squared is', x * x)
 
@@ -5,12 +8,15 @@ import streamlit as st
 from transformers import pipeline
 import ast
 
+
+################ STATEMENT SUMMARIZATION #################
+
 # Load the summarization model
 #summarizer = pipeline("summarization", model="sshleifer/distilbart-cnn-12-6")  # smaller version of the model
 summarizer = pipeline("summarization", model="facebook/bart-large-cnn")
 
 # Define the summarization function
-def summarize(txt):
+def summarize_statement(txt):
     st.write('\n\n')
     #st.write(txt[:100])  # Display the first 100 characters of the article
     #st.write('--------------------------------------------------------------')
@@ -25,16 +31,13 @@ STATEMENT = st.sidebar.text_area('Enter Statement (String)', DEFAULT_STATEMENT, 
 if STATEMENT:
     if st.sidebar.button('Summarize Statement'):
         # Call your Summarize function here
-        #st.write(f"Summarizing: {STATEMENT}")
-        summarize(STATEMENT)  # Directly pass the STATEMENT
+        summarize_statement(STATEMENT)  # Directly pass the STATEMENT
 else:
     st.sidebar.button('Summarize Statement', disabled=True)
     st.warning('👈 Please enter Statement!')    
     
 
-
-#################################
-
+################ SENTIMENT ANALYSIS #################
 
 # Initialize the sentiment analysis pipeline
 # No model was supplied, defaulted to distilbert-base-uncased-finetuned-sst-2-english
@@ -48,7 +51,7 @@ def is_valid_list_string(string):
         return False
         
 # Define the summarization function
-def analyze(txt):
+def analyze_sentiment(txt):
     
     st.write('\n\n')
     #st.write(txt[:100])  # Display the first 100 characters of the article
@@ -76,7 +79,7 @@ SENTIMENT = st.sidebar.text_area('Enter Sentiment (String or List of Strings)', 
 # Enable the button only if there is text in the SENTIMENT variable
 if SENTIMENT:
     if st.sidebar.button('Analyze Sentiment'):
-        analyze(SENTIMENT)  # Directly pass the SENTIMENT
+        analyze_sentiment(SENTIMENT)  # Directly pass the SENTIMENT
 else:
-    st.sidebar.button('Summarize Sentiment', disabled=True)
+    st.sidebar.button('Analyze Sentiment', disabled=True)
     st.warning('👈 Please enter Sentiment!')    
