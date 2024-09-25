@@ -54,10 +54,7 @@ sentiment_pipeline = pipeline("sentiment-analysis")
 # ]"""
 
 # DEFAULT_SENTIMENT = "I'm so happy today!"
-DEFAULT_SENTIMENT = ""
 
-# Create a text area for user input
-SENTIMENT = st.sidebar.text_area('Enter Sentiment (String or List of Strings)', DEFAULT_SENTIMENT, height=150)
 
 def is_valid_list_string(string):
     try:
@@ -67,7 +64,7 @@ def is_valid_list_string(string):
         return False
         
 # Define the summarization function
-def summarize(txt):
+def analyze(txt):
     
     st.write('\n\n')
     #st.write(txt[:100])  # Display the first 100 characters of the article
@@ -89,12 +86,27 @@ def summarize(txt):
         st.write(f"Text: {txt}")
         st.write(f"Sentiment: {results[0]['label']}, Score: {results[0]['score']:.2f}\n")
 
-# Create a button and trigger the summarize function when clicked
-if st.sidebar.button('Summarize Sentiment'):
-    #ast.literal_eval() is a function in Python that safely evaluates a string containing a valid Python expression, 
-    #such as lists, dictionaries, tuples, sets, integers, and floats. It parses the string and returns the corresponding 
-    #Python object, without executing any arbitrary code, which makes it safer than using eval().    
-    #summarize(str(SENTIMENT)) #explicitly change SENTIMENT to string so that even when ypu provide unquoted string, it still works
-    summarize(SENTIMENT)  # Directly pass the SENTIMENT
+
+DEFAULT_SENTIMENT = ""
+# Create a text area for user input
+SENTIMENT = st.sidebar.text_area('Enter Sentiment (String or List of Strings)', DEFAULT_SENTIMENT, height=150)
+
+# Enable the button only if there is text in the SENTIMENT variable
+if SENTIMENT:
+    if st.sidebar.button('Analyze Sentiment'):
+        # Call your Analyze function here
+        #st.write(f"Summarizing: {SENTIMENT}")
+        analyze(SENTIMENT)  # Directly pass the SENTIMENT
 else:
-    st.warning('👈 Please enter Sentiment!')
+    st.sidebar.button('Summarize Sentiment', disabled=True)
+    st.warning('👈 Please enter Sentiment!')    
+    
+# # Create a button and trigger the summarize function when clicked
+# if st.sidebar.button('Summarize Sentiment'):
+#     #ast.literal_eval() is a function in Python that safely evaluates a string containing a valid Python expression, 
+#     #such as lists, dictionaries, tuples, sets, integers, and floats. It parses the string and returns the corresponding 
+#     #Python object, without executing any arbitrary code, which makes it safer than using eval().    
+#     #summarize(str(SENTIMENT)) #explicitly change SENTIMENT to string so that even when ypu provide unquoted string, it still works
+#     analyze(SENTIMENT)  # Directly pass the SENTIMENT
+# else:
+#     st.warning('👈 Please enter Sentiment!')
