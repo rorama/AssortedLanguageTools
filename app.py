@@ -57,8 +57,7 @@ SENTIMENT = st.sidebar.text_area('Enter Sentiment', DEFAULT_SENTIMENT, height=15
 # Define the summarization function
 def summarize(txt):
     
-    txt_converted = summarize(ast.literal_eval(txt)) #convert string to actual content, e.g. list
-    st.write(f'xxxxxxxxxx {txt_converted}')
+    txt_converted = ast.literal_eval(txt) #convert string to actual content, e.g. list
     
     st.write('\n\n')
     #st.write(txt[:100])  # Display the first 100 characters of the article
@@ -68,7 +67,8 @@ def summarize(txt):
     results = sentiment_pipeline(txt_converted)
     
     # Display the results
-    if type(txt_converted) == 'list':
+    #if type(txt_converted) == 'list':
+    if isinstance(txt_converted, list):
         for i, text in enumerate(txt_converted):
             st.write(f"Text: {text}")
             st.write(f"Sentiment: {results[i]['label']}, Score: {results[i]['score']:.2f}\n")
