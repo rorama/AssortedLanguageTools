@@ -51,6 +51,7 @@ DEFAULT_SENTIMENT = """[
     "It's a decent product, nothing special."
 ]"""
 
+DEFAULT_SENTIMENT = "I'm so happy today!"
 # Create a text area for user input
 SENTIMENT = st.sidebar.text_area('Enter Sentiment', DEFAULT_SENTIMENT, height=150)
 
