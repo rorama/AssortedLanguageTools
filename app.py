@@ -56,24 +56,30 @@ SENTIMENT = st.sidebar.text_area('Enter Sentiment', DEFAULT_SENTIMENT, height=15
 
 # Define the summarization function
 def summarize(txt):
+    
+    txt_converted = summarize(ast.literal_eval(SENTIMENT)) #convert string to actual content, e.g. list
+    st.write(f'xxxxxxxxxx {txt_converted}')
+    
     st.write('\n\n')
     #st.write(txt[:100])  # Display the first 100 characters of the article
     st.write('--------------------------------------------------------------')
 
     # Perform Hugging sentiment analysis on multiple texts
-    results = sentiment_pipeline(txt)
+    results = sentiment_pipeline(txt_converted)
     
     # Display the results
-    for i, text in enumerate(txt):
-        st.write(f"Text: {text}")
-        st.write(f"Sentiment: {results[i]['label']}, Score: {results[i]['score']:.2f}\n")
-
+    if type(txt_converted) == 'list':
+        for i, text in enumerate(txt_converted):
+            st.write(f"Text: {text}")
+            st.write(f"Sentiment: {results[i]['label']}, Score: {results[i]['score']:.2f}\n")
+    else:
+        st.write(f"Sentiment: {results['label']}, Score: {results['score']:.2f}\n")
 
 # Create a button and trigger the summarize function when clicked
 if st.sidebar.button('Summarize Sentiment'):
     #ast.literal_eval() is a function in Python that safely evaluates a string containing a valid Python expression, 
     #such as lists, dictionaries, tuples, sets, integers, and floats. It parses the string and returns the corresponding 
     #Python object, without executing any arbitrary code, which makes it safer than using eval().    
-    summarize(ast.literal_eval(SENTIMENT)) #convert string to actual list
+    summarize(txt)
 else:
     st.warning('👈 Please enter Sentiment!')
