@@ -28,12 +28,12 @@ def summarize(txt):
     st.write('\n\n')
     st.write(txt[:100])  # Display the first 100 characters of the article
     st.write('--------------------------------------------------------------')
-    summary = summarizer(txt, max_length=130, min_length=30, do_sample=False)
+    summary = summarizer(txt, max_length=500, min_length=30, do_sample=False)
     st.write(summary[0]['summary_text'])
 
 DEFAULT_STATEMENT = ""
 # Create a text area for user input
-STATEMENT = st.sidebar.text_area('Enter Statement (String or List of Strings)', DEFAULT_STATEMENT, height=150)
+STATEMENT = st.sidebar.text_area('Enter Statement (String)', DEFAULT_STATEMENT, height=150)
 
 # Enable the button only if there is text in the SENTIMENT variable
 if STATEMENT:
