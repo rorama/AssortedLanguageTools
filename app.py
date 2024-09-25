@@ -8,7 +8,7 @@ import streamlit as st
 from transformers import pipeline
 import ast
 
-st.title("Assorted Language Tools - Orama's AI Craze")
+st.title("Assorted Language Tools - AI Craze")
 
 ################ CHAT BOT #################
 
@@ -122,3 +122,8 @@ if SENTIMENT:
 else:
     st.sidebar.button('Analyze Sentiment', disabled=True)
     st.warning('👈 Please enter Sentiment!')    
+
+
+# Add a footnote at the bottom
+st.markdown("---")  # Horizontal line to separate content from footnote
+st.markdown("Orama's AI Craze")
