@@ -43,8 +43,8 @@ if CHAT:
         # Call your Summarize function here
         chat(CHAT)  # Directly pass the your
 else:
-    st.sidebar.button('Summarize Statement', disabled=True)
-    st.warning('👈 Please enter Statement!')    
+    st.sidebar.button('Chat Statement', disabled=True)
+    st.warning('👈 Please enter Chat!')    
     
     
 ################ STATEMENT SUMMARIZATION #################
