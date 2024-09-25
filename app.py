@@ -55,26 +55,34 @@ DEFAULT_SENTIMENT = "I'm so happy today!"
 # Create a text area for user input
 SENTIMENT = st.sidebar.text_area('Enter Sentiment', DEFAULT_SENTIMENT, height=150)
 
+def is_valid_list_string(string):
+    try:
+        result = ast.literal_eval(string)
+        return isinstance(result, list)
+    except (ValueError, SyntaxError):
+        return False
+        
 # Define the summarization function
 def summarize(txt):
-    
-    txt_converted = ast.literal_eval(txt) #convert string to actual content, e.g. list
     
     st.write('\n\n')
     #st.write(txt[:100])  # Display the first 100 characters of the article
     st.write('--------------------------------------------------------------')
-
-    # Perform Hugging sentiment analysis on multiple texts
-    results = sentiment_pipeline(txt_converted)
     
     # Display the results
     #if type(txt_converted) == 'list':
-    if isinstance(txt_converted, list):
+    #if isinstance(txt_converted, list):
+    if is_valid_list_string(txt):        
+        txt_converted = ast.literal_eval(txt) #convert string to actual content, e.g. list
+        # Perform Hugging sentiment analysis on multiple texts
+        results = sentiment_pipeline(txt_converted)        
         for i, text in enumerate(txt_converted):
             st.write(f"Text: {text}")
             st.write(f"Sentiment: {results[i]['label']}, Score: {results[i]['score']:.2f}\n")
     else:
-        st.write(f"Text: {txt_converted}")
+        # Perform Hugging sentiment analysis on multiple texts
+        results = sentiment_pipeline(txt)        
+        st.write(f"Text: {txt}")
         st.write(f"Sentiment: {results[0]['label']}, Score: {results[0]['score']:.2f}\n")
 
 # Create a button and trigger the summarize function when clicked
