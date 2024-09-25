@@ -57,7 +57,7 @@ SENTIMENT = st.sidebar.text_area('Enter Sentiment', DEFAULT_SENTIMENT, height=15
 # Define the summarization function
 def summarize(txt):
     
-    txt_converted = summarize(ast.literal_eval(SENTIMENT)) #convert string to actual content, e.g. list
+    txt_converted = summarize(ast.literal_eval(txt)) #convert string to actual content, e.g. list
     st.write(f'xxxxxxxxxx {txt_converted}')
     
     st.write('\n\n')
