@@ -127,41 +127,41 @@ else:
 
 
 
-# # Load pre-trained GPT-2 model and tokenizer
-# model_name = "gpt-3.5-turbo" # "gpt2"  # Use "gpt-3.5-turbo" or another model from Hugging Face if needed
-# model = GPT2LMHeadModel.from_pretrained(model_name)
-# tokenizer = GPT2Tokenizer.from_pretrained(model_name)
+# Load pre-trained GPT-2 model and tokenizer
+model_name = "gpt2-medium" # "gpt2"  # Use "gpt-3.5-turbo" or another model from Hugging Face if needed
+model = GPT2LMHeadModel.from_pretrained(model_name)
+tokenizer = GPT2Tokenizer.from_pretrained(model_name)
 
-# # Initialize the text generation pipeline
-# gpt_pipeline = pipeline("text-generation", model=model, tokenizer=tokenizer)
+# Initialize the text generation pipeline
+gpt_pipeline = pipeline("text-generation", model=model, tokenizer=tokenizer)
 
-# # Streamlit UI
-# st.markdown("<h3 style='text-align: center; font-size: 20px;'>Chat with GPT</h3>", unsafe_allow_html=True)
+# Streamlit UI
+st.markdown("<h3 style='text-align: center; font-size: 20px;'>Chat with GPT</h3>", unsafe_allow_html=True)
 
-# if 'conversation' not in st.session_state:
-#     st.session_state.conversation = ""
+if 'conversation' not in st.session_state:
+    st.session_state.conversation = ""
 
-# def chat_with_gpt(user_input):
-#     # Append user input to the conversation
-#     st.session_state.conversation += f"User: {user_input}\n"
+def chat_with_gpt(user_input):
+    # Append user input to the conversation
+    st.session_state.conversation += f"User: {user_input}\n"
 
-#     # Generate response
-#     response = gpt_pipeline(user_input, max_length=100, num_return_sequences=1)[0]['generated_text']
-#     response_text = response.replace(user_input, '')  # Strip the user input part from response
+    # Generate response
+    response = gpt_pipeline(user_input, max_length=100, num_return_sequences=1)[0]['generated_text']
+    response_text = response.replace(user_input, '')  # Strip the user input part from response
 
-#     # Append GPT's response to the conversation
-#     st.session_state.conversation += f"GPT: {response_text}\n"
-#     return response_text
+    # Append GPT's response to the conversation
+    st.session_state.conversation += f"GPT: {response_text}\n"
+    return response_text
 
-# # Text input for user query
-# user_input = st.text_input("You:", "")
+# Text input for user query
+user_input = st.text_input("You:", "")
 
-# if st.button("Send"):
-#     if user_input:
-#         chat_with_gpt(user_input)
+if st.button("Send"):
+    if user_input:
+        chat_with_gpt(user_input)
 
-# # Display conversation history
-# st.text_area("Conversation", value=st.session_state.conversation, height=400)
+# Display conversation history
+st.text_area("Conversation", value=st.session_state.conversation, height=400)
 
 
 #############
