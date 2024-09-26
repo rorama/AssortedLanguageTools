@@ -164,13 +164,15 @@ else:
 # st.text_area("Conversation", value=st.session_state.conversation, height=400)
 
 
+# LLaMA 7B model from Hugging Face
+MODEL_NAME = "huggyllama/llama-7b"  # Example of a LLaMA model
+
+import streamlit as st
 from transformers import AutoModelForCausalLM, AutoTokenizer
 import torch
 
-# Load the model and tokenizer from Hugging Face (LLaMA or OpenAssistant)
-# Example: "OpenAssistant/oa-v1" (Open Assistant) or "huggyllama/llama-7b" (LLaMA)
-
-MODEL_NAME = "OpenAssistant/oa_v1"  # You can replace this with a LLaMA model like "huggyllama/llama-7b"
+# Load the model and tokenizer (OpenAssistant or LLaMA)
+MODEL_NAME = "OpenAssistant/oasst-sft-1-pythia-12b"  # Replace with "huggyllama/llama-7b" for LLaMA
 tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
 model = AutoModelForCausalLM.from_pretrained(MODEL_NAME)
 
@@ -193,6 +195,7 @@ if st.button('Generate Response'):
         st.write("Assistant: ", response)
     else:
         st.warning('Please enter some text to get a response!')
+
 
 
 # ################ END #################
