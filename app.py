@@ -5,87 +5,10 @@
 #st.write(x, 'squared is', x * x)
 
 import streamlit as st
-from transformers import pipeline
+from transformers import pipeline, GPT2Tokenizer, GPT2LMHeadModel
 import ast
 
 st.title("Assorted Language Tools - AI Craze")
-
-# ################ CHAT BOT #################
-
-# # Load the GPT model
-# generator = pipeline("text-generation", model="EleutherAI/gpt-neo-2.7B")
-
-# # Streamlit chat UI
-# #st.title("GPT-3 Chatbox")
-
-# # user_input = st.text_input("You: ", "Hello, how are you?")
-
-# # if user_input:
-# #     response = generator(user_input, max_length=100, num_return_sequences=1)[0]['generated_text']
-# #     st.write(f"GPT-3: {response}")
-
-# # Define the summarization function
-# def chat(txt):
-#     st.write('\n\n')
-#     #st.write(txt[:100])  # Display the first 100 characters of the article
-#     #st.write('--------------------------------------------------------------')
-#     #summary = summarizer(txt, max_length=500, min_length=30, do_sample=False)
-#     #st.write(summary[0]['summary_text'])
-#     response = generator(txt, max_length=500, num_return_sequences=1)[0]['generated_text']
-#     st.write(f"GPT-3: {response}")    
-    
-# DEFAULT_CHAT = ""
-# # Create a text area for user input
-# CHAT = st.sidebar.text_area('Enter Chat (String)', DEFAULT_CHAT, height=150)
-
-# # Enable the button only if there is text in the CHAT variable
-# if CHAT:
-#     if st.sidebar.button('Chat Statement'):
-#         # Call your Summarize function here
-#         chat(CHAT)  # Directly pass the your
-# else:
-#     st.sidebar.button('Chat Statement', disabled=True)
-#     st.warning('👈 Please enter Chat!')    
-
-
-import streamlit as st
-from transformers import pipeline, GPT2Tokenizer, GPT2LMHeadModel
-
-# Load pre-trained GPT-2 model and tokenizer
-model_name = "gpt2"  # Use "gpt-3.5-turbo" or another model from Hugging Face if needed
-model = GPT2LMHeadModel.from_pretrained(model_name)
-tokenizer = GPT2Tokenizer.from_pretrained(model_name)
-
-# Initialize the text generation pipeline
-gpt_pipeline = pipeline("text-generation", model=model, tokenizer=tokenizer)
-
-# Streamlit UI
-st.title("Chat with GPT-2")
-
-if 'conversation' not in st.session_state:
-    st.session_state.conversation = ""
-
-def chat_with_gpt(user_input):
-    # Append user input to the conversation
-    st.session_state.conversation += f"User: {user_input}\n"
-
-    # Generate response
-    response = gpt_pipeline(user_input, max_length=100, num_return_sequences=1)[0]['generated_text']
-    response_text = response.replace(user_input, '')  # Strip the user input part from response
-
-    # Append GPT's response to the conversation
-    st.session_state.conversation += f"GPT: {response_text}\n"
-    return response_text
-
-# Text input for user query
-user_input = st.text_input("You:", "")
-
-if st.button("Send"):
-    if user_input:
-        chat_with_gpt(user_input)
-
-# Display conversation history
-st.text_area("Conversation", value=st.session_state.conversation, height=400)
 
     
 ################ STATEMENT SUMMARIZATION #################
@@ -162,6 +85,85 @@ if SENTIMENT:
 else:
     st.sidebar.button('Analyze Sentiment', disabled=True)
     st.warning('👈 Please enter Sentiment!')    
+
+
+# ################ CHAT BOT #################
+
+# # Load the GPT model
+# generator = pipeline("text-generation", model="EleutherAI/gpt-neo-2.7B")
+
+# # Streamlit chat UI
+# #st.title("GPT-3 Chatbox")
+
+# # user_input = st.text_input("You: ", "Hello, how are you?")
+
+# # if user_input:
+# #     response = generator(user_input, max_length=100, num_return_sequences=1)[0]['generated_text']
+# #     st.write(f"GPT-3: {response}")
+
+# # Define the summarization function
+# def chat(txt):
+#     st.write('\n\n')
+#     #st.write(txt[:100])  # Display the first 100 characters of the article
+#     #st.write('--------------------------------------------------------------')
+#     #summary = summarizer(txt, max_length=500, min_length=30, do_sample=False)
+#     #st.write(summary[0]['summary_text'])
+#     response = generator(txt, max_length=500, num_return_sequences=1)[0]['generated_text']
+#     st.write(f"GPT-3: {response}")    
+    
+# DEFAULT_CHAT = ""
+# # Create a text area for user input
+# CHAT = st.sidebar.text_area('Enter Chat (String)', DEFAULT_CHAT, height=150)
+
+# # Enable the button only if there is text in the CHAT variable
+# if CHAT:
+#     if st.sidebar.button('Chat Statement'):
+#         # Call your Summarize function here
+#         chat(CHAT)  # Directly pass the your
+# else:
+#     st.sidebar.button('Chat Statement', disabled=True)
+#     st.warning('👈 Please enter Chat!')    
+
+
+
+
+# Load pre-trained GPT-2 model and tokenizer
+model_name = "gpt-3.5-turbo" # "gpt2"  # Use "gpt-3.5-turbo" or another model from Hugging Face if needed
+model = GPT2LMHeadModel.from_pretrained(model_name)
+tokenizer = GPT2Tokenizer.from_pretrained(model_name)
+
+# Initialize the text generation pipeline
+gpt_pipeline = pipeline("text-generation", model=model, tokenizer=tokenizer)
+
+# Streamlit UI
+st.title("Chat with GPT-2")
+
+if 'conversation' not in st.session_state:
+    st.session_state.conversation = ""
+
+def chat_with_gpt(user_input):
+    # Append user input to the conversation
+    st.session_state.conversation += f"User: {user_input}\n"
+
+    # Generate response
+    response = gpt_pipeline(user_input, max_length=100, num_return_sequences=1)[0]['generated_text']
+    response_text = response.replace(user_input, '')  # Strip the user input part from response
+
+    # Append GPT's response to the conversation
+    st.session_state.conversation += f"GPT: {response_text}\n"
+    return response_text
+
+# Text input for user query
+user_input = st.text_input("You:", "")
+
+if st.button("Send"):
+    if user_input:
+        chat_with_gpt(user_input)
+
+# Display conversation history
+st.text_area("Conversation", value=st.session_state.conversation, height=400)
+
+# ################ END #################
 
 
 # Add a footnote at the bottom
