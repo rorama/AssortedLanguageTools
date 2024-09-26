@@ -10,7 +10,44 @@ import ast
 
 st.title("Assorted Language Tools - AI Craze")
 
-    
+
+
+##########################################################
+
+
+import streamlit as st
+from transformers import AutoModelForSeq2SeqLM, AutoTokenizer
+
+# Load the LLaMA summarization model and tokenizer
+MODEL_NAME = "pszemraj/llama-7b-summarization"  # Example of a LLaMA model fine-tuned for summarization
+tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
+model = AutoModelForSeq2SeqLM.from_pretrained(MODEL_NAME)
+
+# Streamlit UI for input
+st.title("Text Summarization with LLaMA")
+
+# Input text area for the article
+article = st.text_area("Enter the text you want to summarize", height=300)
+
+# Summarize button
+if st.button("Summarize"):
+    if article:
+        # Tokenize input article
+        inputs = tokenizer(article, return_tensors="pt", truncation=True, padding="longest", max_length=1024)
+
+        # Generate summary
+        summary_ids = model.generate(inputs["input_ids"], max_length=150, min_length=30, length_penalty=2.0, num_beams=4, early_stopping=True)
+
+        # Decode summary
+        summary = tokenizer.decode(summary_ids[0], skip_special_tokens=True)
+
+        # Display the summary
+        st.write("**Summary:**")
+        st.write(summary)
+    else:
+        st.warning("Please enter some text to summarize!")
+
+
 ################ STATEMENT SUMMARIZATION #################
 
 # Load the summarization model
