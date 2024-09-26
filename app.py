@@ -166,40 +166,40 @@ else:
 
 #############
 
-# LLaMA 7B model from Hugging Face
-# MODEL_NAME = "huggyllama/llama-7b"  # Example of a LLaMA model
+# # LLaMA 7B model from Hugging Face
+# # MODEL_NAME = "huggyllama/llama-7b"  # Example of a LLaMA model
 
-# Try this OpenAssistant model available on Hugging Face
-MODEL_NAME = "OpenAssistant/oasst-sft-1-pythia-12b"  # Example of an OpenAssistant model
+# # Try this OpenAssistant model available on Hugging Face
+# MODEL_NAME = "OpenAssistant/oasst-sft-1-pythia-12b"  # Example of an OpenAssistant model
 
-import streamlit as st
-from transformers import AutoModelForCausalLM, AutoTokenizer
-import torch
+# import streamlit as st
+# from transformers import AutoModelForCausalLM, AutoTokenizer
+# import torch
 
-# Load the model and tokenizer (OpenAssistant or LLaMA)
-MODEL_NAME = "OpenAssistant/oasst-sft-1-pythia-12b"  # Replace with "huggyllama/llama-7b" for LLaMA
-tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
-model = AutoModelForCausalLM.from_pretrained(MODEL_NAME)
+# # Load the model and tokenizer (OpenAssistant or LLaMA)
+# MODEL_NAME = "OpenAssistant/oasst-sft-1-pythia-12b"  # Replace with "huggyllama/llama-7b" for LLaMA
+# tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
+# model = AutoModelForCausalLM.from_pretrained(MODEL_NAME)
 
-# Streamlit UI for input
-st.markdown("<h3 style='text-align: center; font-size: 20px;'>Chat with OpenAssistant/LLaMA</h3>", unsafe_allow_html=True)
+# # Streamlit UI for input
+# st.markdown("<h3 style='text-align: center; font-size: 20px;'>Chat with OpenAssistant/LLaMA</h3>", unsafe_allow_html=True)
 
-# Input text area
-user_input = st.text_area("You:", "", height=150)
+# # Input text area
+# user_input = st.text_area("You:", "", height=150)
 
-if st.button('Generate Response'):
-    if user_input:
-        # Tokenize the input and generate response
-        inputs = tokenizer(user_input, return_tensors="pt")
-        outputs = model.generate(**inputs, max_length=150)
+# if st.button('Generate Response'):
+#     if user_input:
+#         # Tokenize the input and generate response
+#         inputs = tokenizer(user_input, return_tensors="pt")
+#         outputs = model.generate(**inputs, max_length=150)
 
-        # Decode the generated response
-        response = tokenizer.decode(outputs[0], skip_special_tokens=True)
+#         # Decode the generated response
+#         response = tokenizer.decode(outputs[0], skip_special_tokens=True)
 
-        # Display the model's response
-        st.write("Assistant: ", response)
-    else:
-        st.warning('Please enter some text to get a response!')
+#         # Display the model's response
+#         st.write("Assistant: ", response)
+#     else:
+#         st.warning('Please enter some text to get a response!')
 
 
 
