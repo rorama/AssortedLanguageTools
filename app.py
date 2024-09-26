@@ -24,7 +24,7 @@ tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
 model = AutoModelForSeq2SeqLM.from_pretrained(MODEL_NAME)
 
 # Streamlit UI for input
-st.title("Text Summarization with BART")
+st.markdown("<h3 style='text-align: center; font-size: 20px;'>Text Summarization with BART</h3>", unsafe_allow_html=True)
 
 # Input text area for the article
 article = st.text_area("Enter the text you want to summarize", height=300)
@@ -47,7 +47,32 @@ if st.button("Summarize"):
     else:
         st.warning("Please enter some text to summarize!")
 
+DEFAULT_STATEMENT = ""
+# Create a text area for user input
+STATEMENT = st.sidebar.text_area('Enter Statement (String)', DEFAULT_STATEMENT, height=150)
 
+# Enable the button only if there is text in the SENTIMENT variable
+if STATEMENT:
+    if st.sidebar.button('Summarize Statement'):
+        # Call your Summarize function here
+        # summarize_statement(STATEMENT)  # Directly pass the STATEMENT
+
+        # Tokenize input article
+        inputs = tokenizer(STATEMENT, return_tensors="pt", truncation=True, padding="longest", max_length=1024)
+
+        # Generate summary
+        summary_ids = model.generate(inputs["input_ids"], max_length=150, min_length=30, length_penalty=2.0, num_beams=4, early_stopping=True)
+
+        # Decode summary
+        summary = tokenizer.decode(summary_ids[0], skip_special_tokens=True)
+
+        # Display the summary
+        st.write("**Summary:**")
+        st.write(summary)        
+else:
+    st.sidebar.button('Summarize Statement', disabled=True)
+    st.warning('👈 Please enter Statement!')   
+    
 
 ################ STATEMENT SUMMARIZATION #################
 
