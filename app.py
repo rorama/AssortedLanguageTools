@@ -164,8 +164,13 @@ else:
 # st.text_area("Conversation", value=st.session_state.conversation, height=400)
 
 
+#############
+
 # LLaMA 7B model from Hugging Face
-MODEL_NAME = "huggyllama/llama-7b"  # Example of a LLaMA model
+# MODEL_NAME = "huggyllama/llama-7b"  # Example of a LLaMA model
+
+# Try this OpenAssistant model available on Hugging Face
+MODEL_NAME = "OpenAssistant/oasst-sft-1-pythia-12b"  # Example of an OpenAssistant model
 
 import streamlit as st
 from transformers import AutoModelForCausalLM, AutoTokenizer
@@ -177,7 +182,7 @@ tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
 model = AutoModelForCausalLM.from_pretrained(MODEL_NAME)
 
 # Streamlit UI for input
-st.title("Chat with OpenAssistant/LLaMA")
+st.markdown("<h3 style='text-align: center; font-size: 20px;'>Chat with OpenAssistant/LLaMA</h3>", unsafe_allow_html=True)
 
 # Input text area
 user_input = st.text_area("You:", "", height=150)
