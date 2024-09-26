@@ -70,7 +70,7 @@ if STATEMENT:
         st.write("**Summary:**")
         st.write(summary)        
 else:
-    st.sidebar.button('Summarize Statement', disabled=True)
+    st.sidebar.button('Summarize Statement1', disabled=True)
     st.warning('👈 Please enter Statement!')   
     
 
