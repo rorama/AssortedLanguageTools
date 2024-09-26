@@ -18,13 +18,13 @@ st.title("Assorted Language Tools - AI Craze")
 import streamlit as st
 from transformers import AutoModelForSeq2SeqLM, AutoTokenizer
 
-# Load the LLaMA summarization model and tokenizer
-MODEL_NAME = "pszemraj/llama-7b-summarization"  # Example of a LLaMA model fine-tuned for summarization
+# Load the summarization model and tokenizer
+MODEL_NAME = "facebook/bart-large-cnn"  # A commonly used summarization model
 tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
 model = AutoModelForSeq2SeqLM.from_pretrained(MODEL_NAME)
 
 # Streamlit UI for input
-st.title("Text Summarization with LLaMA")
+st.title("Text Summarization with BART")
 
 # Input text area for the article
 article = st.text_area("Enter the text you want to summarize", height=300)
@@ -46,6 +46,7 @@ if st.button("Summarize"):
         st.write(summary)
     else:
         st.warning("Please enter some text to summarize!")
+
 
 
 ################ STATEMENT SUMMARIZATION #################
