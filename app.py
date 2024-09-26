@@ -49,7 +49,7 @@ if st.button("Summarize"):
 
 DEFAULT_STATEMENT = ""
 # Create a text area for user input
-STATEMENT = st.sidebar.text_area('Enter Statement (String)', DEFAULT_STATEMENT, height=150)
+STATEMENT = st.sidebar.text_area('Enter Statement (String1)', DEFAULT_STATEMENT, height=150)
 
 # Enable the button only if there is text in the SENTIMENT variable
 if STATEMENT:
