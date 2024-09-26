@@ -53,7 +53,7 @@ STATEMENT = st.sidebar.text_area('Enter Statement (String1)', DEFAULT_STATEMENT,
 
 # Enable the button only if there is text in the SENTIMENT variable
 if STATEMENT:
-    if st.sidebar.button('Summarize Statement'):
+    if st.sidebar.button('Summarize Statement1'):
         # Call your Summarize function here
         # summarize_statement(STATEMENT)  # Directly pass the STATEMENT
 
