@@ -64,6 +64,8 @@ else:
     
 ################ STATEMENT SUMMARIZATION1 - side bar - tokenizer #################
 
+from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
+
 # Load the summarization model and tokenizer
 MODEL_NAME = "facebook/bart-large-cnn"  # A commonly used summarization model
 tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
