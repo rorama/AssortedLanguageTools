@@ -1,4 +1,4 @@
-# Natural Language Tools
+# Simply Assorted Language Tools (SALT)
 # Richard Orama - September 2024
 
 #x = st.slider('Select a value')
