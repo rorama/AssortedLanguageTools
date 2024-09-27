@@ -29,7 +29,7 @@ model = AutoModelForSeq2SeqLM.from_pretrained(MODEL_NAME)
 st.markdown("<h3 style='text-align: center; font-size: 20px; background-color: white; color: black;'>Text Summarization with BART</h3>", unsafe_allow_html=True)
 
 # Input text area for the article
-article = st.text_area("Enter the text you want to summarize", height=300)
+article = st.text_area("Enter text to summarize", height=300)
 
 # Summarize button
 if st.button("Summarize"):
@@ -47,7 +47,8 @@ if st.button("Summarize"):
         st.write("**Summary:**")
         st.write(summary)
     else:
-        st.warning("Please enter some text to summarize!")
+        pass
+        #st.warning("Please enter some text to summarize!")
 
 
 ################ STATEMENT SUMMARIZATION1 - side bar #################
@@ -82,7 +83,7 @@ if STATEMENT:
         st.write(summary)        
 else:
     st.sidebar.button('Summarize Statement1', disabled=True)
-    st.warning('👈 Please enter Statement!')   
+    #st.warning('👈 Please enter Statement!')   
     
 
 ################ STATEMENT SUMMARIZATION - side bar #################
@@ -114,7 +115,7 @@ if STATEMENT:
         #summarize_statement(STATEMENT)  # Directly pass the STATEMENT
 else:
     st.sidebar.button('Summarize Statement', disabled=True)
-    st.warning('👈 Please enter Statement!')    
+    #st.warning('👈 Please enter Statement!')    
     
 
 ################ SENTIMENT ANALYSIS - side bar #################
