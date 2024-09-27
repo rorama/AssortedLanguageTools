@@ -57,6 +57,7 @@ MODEL_NAME = "facebook/bart-large-cnn"  # A commonly used summarization model
 tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
 model = AutoModelForSeq2SeqLM.from_pretrained(MODEL_NAME)
 
+st.sidebar.markdown("<h3 style='text-align: center; font-size: 20px; background-color: white; color: black;'>xxxText Summarization with BART</h3>", unsafe_allow_html=True)
 DEFAULT_STATEMENT = ""
 # Create a text area for user input
 STATEMENT = st.sidebar.text_area('Enter Statement (String1)', DEFAULT_STATEMENT, height=150)
