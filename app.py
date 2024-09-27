@@ -30,7 +30,7 @@ def is_valid_list_string(string):
 # Define the summarization function
 def analyze_sentiment(txt):
     
-    st.write('\n\n')
+    #st.write('\n\n')
     #st.write(txt[:100])  # Display the first 100 characters of the article
     #st.write('--------------------------------------------------------------')
     
@@ -40,13 +40,13 @@ def analyze_sentiment(txt):
         # Perform Hugging sentiment analysis on multiple texts
         results = sentiment_pipeline(txt_converted)        
         for i, text in enumerate(txt_converted):
-            st.write(f"Text: {text}")
-            st.write(f"Sentiment: {results[i]['label']}, Score: {results[i]['score']:.2f}\n")
+            st.sidebar.write(f"Text: {text}")
+            st.sidebar.write(f"Sentiment: {results[i]['label']}, Score: {results[i]['score']:.2f}\n")
     else:
         # Perform Hugging sentiment analysis on multiple texts
         results = sentiment_pipeline(txt)        
-        st.write(f"Text: {txt}")
-        st.write(f"Sentiment: {results[0]['label']}, Score: {results[0]['score']:.2f}\n")
+        st.sidebar.write(f"Text: {txt}")
+        st.sidebar.write(f"Sentiment: {results[0]['label']}, Score: {results[0]['score']:.2f}\n")
 
 st.sidebar.markdown("<h3 style='text-align: center; font-size: 16px; background-color: white; color: black;'>Sentiment Analysis</h3>", unsafe_allow_html=True)
 DEFAULT_SENTIMENT = ""
