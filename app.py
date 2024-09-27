@@ -62,7 +62,7 @@ else:
     #st.warning('👈 Please enter Sentiment!')   
 
     
-################ STATEMENT SUMMARIZATION1 - side bar - tokenizer #################
+################ STATEMENT SUMMARIZATION - side bar - tokenizer #################
 
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
 
@@ -92,8 +92,8 @@ if STATEMENT:
         summary = tokenizer.decode(summary_ids[0], skip_special_tokens=True)
 
         # Display the summary
-        st.write("**Summary:**")
-        st.write(summary)        
+        st.sidebar.write("**Summary:**")
+        st.sidebar.write(summary)        
 else:
     st.sidebar.button('Summarize Statement1', disabled=True)
     #st.warning('👈 Please enter Statement!')   
@@ -108,18 +108,18 @@ summarizer = pipeline("summarization", model="facebook/bart-large-cnn")
 st.sidebar.markdown("<h3 style='text-align: center; font-size: 16px; background-color: white; color: black;'>Text Summarization - BART Pipeline</h3>", unsafe_allow_html=True)
 DEFAULT_STATEMENT = ""
 # Create a text area for user input
-STATEMENT = st.sidebar.text_area('Enter Statement (String)', DEFAULT_STATEMENT, height=150)
+STATEMENT = st.sidebar.text_area('Enter Statement (String2)', DEFAULT_STATEMENT, height=150)
 
 # Enable the button only if there is text in the SENTIMENT variable
 if STATEMENT:
-    if st.sidebar.button('Summarize Statement'):
+    if st.sidebar.button('Summarize Statement2'):
         # Call your Summarize function here
-        st.write('\n\n')
+        #st.write('\n\n')
         summary = summarizer(STATEMENT, max_length=500, min_length=30, do_sample=False)
-        st.write(summary[0]['summary_text'])
+        st.sidebar.write(summary[0]['summary_text'])
         #summarize_statement(STATEMENT)  # Directly pass the STATEMENT
 else:
-    st.sidebar.button('Summarize Statement', disabled=True)
+    st.sidebar.button('Summarize Statement2', disabled=True)
     #st.warning('👈 Please enter Statement!')    
     
 
