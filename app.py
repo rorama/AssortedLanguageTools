@@ -14,7 +14,7 @@ st.markdown("<h3 style='text-align: center; font-size: 16px;'>Simply Assorted La
 st.markdown("<h3 style='text-align: center; font-size: 20px; color: blue;'>Orama's AI Craze</h3>", unsafe_allow_html=True)
 
 
-################ SENTIMENT ANALYSIS - side bar #################
+################ SENTIMENT ANALYSIS - side bar - pippeline #################
 
 # Initialize the sentiment analysis pipeline
 # No model was supplied, defaulted to distilbert-base-uncased-finetuned-sst-2-english
@@ -48,7 +48,7 @@ def analyze_sentiment(txt):
         st.sidebar.write(f"Text: {txt}")
         st.sidebar.write(f"Sentiment: {results[0]['label']}, Score: {results[0]['score']:.2f}\n")
 
-st.sidebar.markdown("<h3 style='text-align: center; font-size: 16px; background-color: white; color: black;'>Sentiment Analysis</h3>", unsafe_allow_html=True)
+st.sidebar.markdown("<h3 style='text-align: center; font-size: 16px; background-color: white; color: black;'>Sentiment Analysis - Pipeline</h3>", unsafe_allow_html=True)
 DEFAULT_SENTIMENT = ""
 # Create a text area for user input
 SENTIMENT = st.sidebar.text_area('Enter Sentiment (String or List of Strings)', DEFAULT_SENTIMENT, height=150)
@@ -62,52 +62,14 @@ else:
     #st.warning('👈 Please enter Sentiment!')   
 
     
-
-################ STATEMENT SUMMARIZATION - main area #################
-
-
-import streamlit as st
-from transformers import AutoModelForSeq2SeqLM, AutoTokenizer
+################ STATEMENT SUMMARIZATION1 - side bar - tokenizer #################
 
 # Load the summarization model and tokenizer
 MODEL_NAME = "facebook/bart-large-cnn"  # A commonly used summarization model
 tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
 model = AutoModelForSeq2SeqLM.from_pretrained(MODEL_NAME)
 
-# Streamlit UI for input
-st.markdown("<h3 style='text-align: center; font-size: 20px; background-color: white; color: black;'>Text Summarization with BART</h3>", unsafe_allow_html=True)
-
-# Input text area for the article
-article = st.text_area("Enter text to summarize", height=300)
-
-# Summarize button
-if st.button("Summarize"):
-    if article:
-        # Tokenize input article
-        inputs = tokenizer(article, return_tensors="pt", truncation=True, padding="longest", max_length=1024)
-
-        # Generate summary
-        summary_ids = model.generate(inputs["input_ids"], max_length=150, min_length=30, length_penalty=2.0, num_beams=4, early_stopping=True)
-
-        # Decode summary
-        summary = tokenizer.decode(summary_ids[0], skip_special_tokens=True)
-
-        # Display the summary
-        st.write("**Summary:**")
-        st.write(summary)
-    else:
-        pass
-        #st.warning("Please enter some text to summarize!")
-
-
-################ STATEMENT SUMMARIZATION1 - side bar #################
-
-# Load the summarization model and tokenizer
-MODEL_NAME = "facebook/bart-large-cnn"  # A commonly used summarization model
-tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
-model = AutoModelForSeq2SeqLM.from_pretrained(MODEL_NAME)
-
-st.sidebar.markdown("<h3 style='text-align: center; font-size: 16px; background-color: white; color: black;'>Text Summarization - BART</h3>", unsafe_allow_html=True)
+st.sidebar.markdown("<h3 style='text-align: center; font-size: 16px; background-color: white; color: black;'>Text Summarization - BART Tokenizer</h3>", unsafe_allow_html=True)
 DEFAULT_STATEMENT = ""
 # Create a text area for user input
 STATEMENT = st.sidebar.text_area('Enter Statement (String1)', DEFAULT_STATEMENT, height=150)
@@ -135,21 +97,13 @@ else:
     #st.warning('👈 Please enter Statement!')   
     
 
-################ STATEMENT SUMMARIZATION - side bar #################
+################ STATEMENT SUMMARIZATION - side bar - pipeline #################
 
 # Load the summarization model
 #summarizer = pipeline("summarization", model="sshleifer/distilbart-cnn-12-6")  # smaller version of the model
 summarizer = pipeline("summarization", model="facebook/bart-large-cnn")
 
-# # Define the summarization function
-# def summarize_statement(txt):
-#     st.write('\n\n')
-#     #st.write(txt[:100])  # Display the first 100 characters of the article
-#     #st.write('--------------------------------------------------------------')
-#     summary = summarizer(txt, max_length=500, min_length=30, do_sample=False)
-#     st.write(summary[0]['summary_text'])
-
-st.sidebar.markdown("<h3 style='text-align: center; font-size: 16px; background-color: white; color: black;'>Text Summarization - BART</h3>", unsafe_allow_html=True)
+st.sidebar.markdown("<h3 style='text-align: center; font-size: 16px; background-color: white; color: black;'>Text Summarization - BART Pipeline</h3>", unsafe_allow_html=True)
 DEFAULT_STATEMENT = ""
 # Create a text area for user input
 STATEMENT = st.sidebar.text_area('Enter Statement (String)', DEFAULT_STATEMENT, height=150)
