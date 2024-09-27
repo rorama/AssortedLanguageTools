@@ -8,7 +8,8 @@ import streamlit as st
 from transformers import pipeline, GPT2Tokenizer, GPT2LMHeadModel
 import ast
 
-st.title("Assorted Language Tools")
+#st.title("Assorted Language Tools")
+st.markdown("<h1 style='text-align: center; font-size: 20px;'>Assorted Language Tools</h1>", unsafe_allow_html=True)
 st.markdown("<h3 style='text-align: center; font-size: 20px; color: blue;'>Orama's AI Craze</h3>", unsafe_allow_html=True)
 
 
@@ -24,7 +25,7 @@ tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
 model = AutoModelForSeq2SeqLM.from_pretrained(MODEL_NAME)
 
 # Streamlit UI for input
-st.markdown("<h3 style='text-align: center; font-size: 20px; color: red;'>Text Summarization with BART</h3>", unsafe_allow_html=True)
+st.markdown("<h3 style='text-align: center; font-size: 20px; background-color: yellow;'>Text Summarization with BART</h3>", unsafe_allow_html=True)
 
 # Input text area for the article
 article = st.text_area("Enter the text you want to summarize", height=300)
@@ -210,7 +211,7 @@ tokenizer = GPT2Tokenizer.from_pretrained(model_name)
 gpt_pipeline = pipeline("text-generation", model=model, tokenizer=tokenizer)
 
 # Streamlit UI
-st.markdown("<h3 style='text-align: center; font-size: 20px; color: red;'>Chat with GPT</h3>", unsafe_allow_html=True)
+st.markdown("<h3 style='text-align: center; font-size: 20px; background-color: yellow;'>Chat with GPT</h3>", unsafe_allow_html=True)
 
 if 'conversation' not in st.session_state:
     st.session_state.conversation = ""
