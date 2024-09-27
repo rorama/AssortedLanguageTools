@@ -9,7 +9,8 @@ from transformers import pipeline, GPT2Tokenizer, GPT2LMHeadModel
 import ast
 
 #st.title("Assorted Language Tools")
-st.markdown("<h1 style='text-align: center; font-size: 20px;'>Assorted Language Tools</h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center; font-size: 20px;'>S A L T</h1>", unsafe_allow_html=True)
+st.markdown("<h3 style='text-align: center; font-size: 16px;'>Simply Assorted Language Tools</h3>", unsafe_allow_html=True)
 st.markdown("<h3 style='text-align: center; font-size: 20px; color: blue;'>Orama's AI Craze</h3>", unsafe_allow_html=True)
 
 
