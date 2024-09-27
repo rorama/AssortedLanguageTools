@@ -14,6 +14,55 @@ st.markdown("<h3 style='text-align: center; font-size: 16px;'>Simply Assorted La
 st.markdown("<h3 style='text-align: center; font-size: 20px; color: blue;'>Orama's AI Craze</h3>", unsafe_allow_html=True)
 
 
+################ SENTIMENT ANALYSIS - side bar #################
+
+# Initialize the sentiment analysis pipeline
+# No model was supplied, defaulted to distilbert-base-uncased-finetuned-sst-2-english
+sentiment_pipeline = pipeline("sentiment-analysis")
+
+def is_valid_list_string(string):
+    try:
+        result = ast.literal_eval(string)
+        return isinstance(result, list)
+    except (ValueError, SyntaxError):
+        return False
+        
+# Define the summarization function
+def analyze_sentiment(txt):
+    
+    st.write('\n\n')
+    #st.write(txt[:100])  # Display the first 100 characters of the article
+    #st.write('--------------------------------------------------------------')
+    
+    # Display the results
+    if is_valid_list_string(txt):        
+        txt_converted = ast.literal_eval(txt) #convert string to actual content, e.g. list
+        # Perform Hugging sentiment analysis on multiple texts
+        results = sentiment_pipeline(txt_converted)        
+        for i, text in enumerate(txt_converted):
+            st.write(f"Text: {text}")
+            st.write(f"Sentiment: {results[i]['label']}, Score: {results[i]['score']:.2f}\n")
+    else:
+        # Perform Hugging sentiment analysis on multiple texts
+        results = sentiment_pipeline(txt)        
+        st.write(f"Text: {txt}")
+        st.write(f"Sentiment: {results[0]['label']}, Score: {results[0]['score']:.2f}\n")
+
+st.sidebar.markdown("<h3 style='text-align: center; font-size: 16px; background-color: white; color: black;'>Sentiment Analysis</h3>", unsafe_allow_html=True)
+DEFAULT_SENTIMENT = ""
+# Create a text area for user input
+SENTIMENT = st.sidebar.text_area('Enter Sentiment (String or List of Strings)', DEFAULT_SENTIMENT, height=150)
+
+# Enable the button only if there is text in the SENTIMENT variable
+if SENTIMENT:
+    if st.sidebar.button('Analyze Sentiment'):
+        analyze_sentiment(SENTIMENT)  # Directly pass the SENTIMENT
+else:
+    st.sidebar.button('Analyze Sentiment', disabled=True)
+    st.warning('👈 Please enter Sentiment!')   
+
+    
+
 ################ STATEMENT SUMMARIZATION - main area #################
 
 
@@ -117,53 +166,6 @@ else:
     st.sidebar.button('Summarize Statement', disabled=True)
     #st.warning('👈 Please enter Statement!')    
     
-
-################ SENTIMENT ANALYSIS - side bar #################
-
-# Initialize the sentiment analysis pipeline
-# No model was supplied, defaulted to distilbert-base-uncased-finetuned-sst-2-english
-sentiment_pipeline = pipeline("sentiment-analysis")
-
-def is_valid_list_string(string):
-    try:
-        result = ast.literal_eval(string)
-        return isinstance(result, list)
-    except (ValueError, SyntaxError):
-        return False
-        
-# Define the summarization function
-def analyze_sentiment(txt):
-    
-    st.write('\n\n')
-    #st.write(txt[:100])  # Display the first 100 characters of the article
-    #st.write('--------------------------------------------------------------')
-    
-    # Display the results
-    if is_valid_list_string(txt):        
-        txt_converted = ast.literal_eval(txt) #convert string to actual content, e.g. list
-        # Perform Hugging sentiment analysis on multiple texts
-        results = sentiment_pipeline(txt_converted)        
-        for i, text in enumerate(txt_converted):
-            st.write(f"Text: {text}")
-            st.write(f"Sentiment: {results[i]['label']}, Score: {results[i]['score']:.2f}\n")
-    else:
-        # Perform Hugging sentiment analysis on multiple texts
-        results = sentiment_pipeline(txt)        
-        st.write(f"Text: {txt}")
-        st.write(f"Sentiment: {results[0]['label']}, Score: {results[0]['score']:.2f}\n")
-
-st.sidebar.markdown("<h3 style='text-align: center; font-size: 16px; background-color: white; color: black;'>Sentiment Analysis</h3>", unsafe_allow_html=True)
-DEFAULT_SENTIMENT = ""
-# Create a text area for user input
-SENTIMENT = st.sidebar.text_area('Enter Sentiment (String or List of Strings)', DEFAULT_SENTIMENT, height=150)
-
-# Enable the button only if there is text in the SENTIMENT variable
-if SENTIMENT:
-    if st.sidebar.button('Analyze Sentiment'):
-        analyze_sentiment(SENTIMENT)  # Directly pass the SENTIMENT
-else:
-    st.sidebar.button('Analyze Sentiment', disabled=True)
-    st.warning('👈 Please enter Sentiment!')    
 
 
 # ################ CHAT BOT - main area #################
