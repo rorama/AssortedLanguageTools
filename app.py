@@ -12,7 +12,7 @@ st.title("Assorted Language Tools - AI Craze")
 
 
 
-##########################################################
+################ STATEMENT SUMMARIZATION - main area #################
 
 
 import streamlit as st
@@ -47,6 +47,14 @@ if st.button("Summarize"):
     else:
         st.warning("Please enter some text to summarize!")
 
+
+################ STATEMENT SUMMARIZATION1 - side bar #################
+
+# Load the summarization model and tokenizer
+MODEL_NAME = "facebook/bart-large-cnn"  # A commonly used summarization model
+tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
+model = AutoModelForSeq2SeqLM.from_pretrained(MODEL_NAME)
+
 DEFAULT_STATEMENT = ""
 # Create a text area for user input
 STATEMENT = st.sidebar.text_area('Enter Statement (String1)', DEFAULT_STATEMENT, height=150)
@@ -74,19 +82,19 @@ else:
     st.warning('👈 Please enter Statement!')   
     
 
-################ STATEMENT SUMMARIZATION #################
+################ STATEMENT SUMMARIZATION - side bar #################
 
 # Load the summarization model
 #summarizer = pipeline("summarization", model="sshleifer/distilbart-cnn-12-6")  # smaller version of the model
 summarizer = pipeline("summarization", model="facebook/bart-large-cnn")
 
-# Define the summarization function
-def summarize_statement(txt):
-    st.write('\n\n')
-    #st.write(txt[:100])  # Display the first 100 characters of the article
-    #st.write('--------------------------------------------------------------')
-    summary = summarizer(txt, max_length=500, min_length=30, do_sample=False)
-    st.write(summary[0]['summary_text'])
+# # Define the summarization function
+# def summarize_statement(txt):
+#     st.write('\n\n')
+#     #st.write(txt[:100])  # Display the first 100 characters of the article
+#     #st.write('--------------------------------------------------------------')
+#     summary = summarizer(txt, max_length=500, min_length=30, do_sample=False)
+#     st.write(summary[0]['summary_text'])
 
 DEFAULT_STATEMENT = ""
 # Create a text area for user input
@@ -96,13 +104,16 @@ STATEMENT = st.sidebar.text_area('Enter Statement (String)', DEFAULT_STATEMENT, 
 if STATEMENT:
     if st.sidebar.button('Summarize Statement'):
         # Call your Summarize function here
-        summarize_statement(STATEMENT)  # Directly pass the STATEMENT
+        st.write('\n\n')
+        summary = summarizer(STATEMENT, max_length=500, min_length=30, do_sample=False)
+        st.write(summary[0]['summary_text'])
+        #summarize_statement(STATEMENT)  # Directly pass the STATEMENT
 else:
     st.sidebar.button('Summarize Statement', disabled=True)
     st.warning('👈 Please enter Statement!')    
     
 
-################ SENTIMENT ANALYSIS #################
+################ SENTIMENT ANALYSIS - side bar #################
 
 # Initialize the sentiment analysis pipeline
 # No model was supplied, defaulted to distilbert-base-uncased-finetuned-sst-2-english
@@ -150,7 +161,7 @@ else:
     st.warning('👈 Please enter Sentiment!')    
 
 
-# ################ CHAT BOT #################
+# ################ CHAT BOT - main area #################
 
 # # Load the GPT model
 # generator = pipeline("text-generation", model="EleutherAI/gpt-neo-2.7B")
