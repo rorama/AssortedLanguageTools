@@ -246,4 +246,4 @@ st.text_area("Conversation", value=st.session_state.conversation, height=400)
 
 # Add a footnote at the bottom
 st.markdown("---")  # Horizontal line to separate content from footnote
-st.markdown("<h3 style='text-align: center; font-size: 20px; color: blue;'>Orama's AI Craze</h3>", unsafe_allow_html=True)
+st.markdown("<h3 style='text-align: center; font-size: 20px; color: yellow;'>Orama's AI Craze</h3>", unsafe_allow_html=True)
