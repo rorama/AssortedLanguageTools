@@ -9,10 +9,10 @@ from transformers import pipeline, GPT2Tokenizer, GPT2LMHeadModel
 import ast
 
 #st.title("Assorted Language Tools")
-st.markdown("<h1 style='text-align: center; font-size: 40px; color: yellow;'>S A L T</h1>", unsafe_allow_html=True)
-st.markdown("<h3 style='text-align: center; font-size: 16px;'>Selectively Assorted Language Tools</h3>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center; font-size: 40px; color: yellow;'>O - S A L T</h1>", unsafe_allow_html=True)
+st.markdown("<h3 style='text-align: center; font-size: 16px;'>Orama's Selectively Assorted Language Tools</h3>", unsafe_allow_html=True)
 #st.markdown("---")  # Horizontal line to separate content from the rest
-st.markdown("<h3 style='text-align: center; font-size: 20px; color: yellow;'>Orama's AI Craze</h3>", unsafe_allow_html=True)
+#st.markdown("<h3 style='text-align: center; font-size: 20px; color: yellow;'>Orama's AI Craze</h3>", unsafe_allow_html=True)
 
 
 ################ SENTIMENT ANALYSIS - side bar - pippeline #################
