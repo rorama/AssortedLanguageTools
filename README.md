@@ -1,5 +1,5 @@
 ---
-title: Test Summarizer
+title: Selectively Assorted Language Tools
 emoji: 🏢
 colorFrom: indigo
 colorTo: purple
