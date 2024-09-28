@@ -174,7 +174,7 @@ tokenizer = GPT2Tokenizer.from_pretrained(model_name)
 gpt_pipeline = pipeline("text-generation", model=model, tokenizer=tokenizer)
 
 # Streamlit UI
-st.markdown("<h3 style='text-align: center; font-size: 20px; background-color: white; color: black;'>Chat with GPT</h3>", unsafe_allow_html=True)
+st.markdown("<h3 style='text-align: center; font-size: 20px; background-color: white; color: black;'>Chat - gpt2-medium</h3>", unsafe_allow_html=True)
 
 if 'conversation' not in st.session_state:
     st.session_state.conversation = ""
