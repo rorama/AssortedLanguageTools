@@ -150,10 +150,10 @@ if STATEMENT:
     # Generate speech
     speech = tts(text)
 
-    st.sidebar.write(speech.keys())
+    # st.sidebar.write(speech.keys())
       
     # Access the audio waveform from the dictionary (assuming key name is 'waveform')
-    audio_data = speech['waveform']
+    audio_data = speech['audio'] # speech['waveform']
     
     # Optional: Save the audio to a file (uncomment if needed)
     sd.write(audio_data, samplerate=speech['sampling_rate'])  # Adjust samplerate if necessary
