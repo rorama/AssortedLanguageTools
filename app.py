@@ -143,13 +143,15 @@ STATEMENT = st.sidebar.text_area('Enter Text', DEFAULT_STATEMENT, height=150)
 
 # Enable the button only if there is text in the TTS variable
 if STATEMENT:
-  if st.sidebar.button('TTS'):
+  if st.sidebar.button('Convert Text to Speech'):
     # Text to generate speech from
     text = STATEMENT  # Use the user input from STATEMENT
     
     # Generate speech
     speech = tts(text)
-    
+
+    st.sidebar.write(speech.keys())
+      
     # Access the audio waveform from the dictionary (assuming key name is 'waveform')
     audio_data = speech['waveform']
     
@@ -164,7 +166,7 @@ if STATEMENT:
     
     st.sidebar.write('Text converted to speech')
 else:
-  st.sidebar.button('TTS', disabled=True)
+  st.sidebar.button('Convert Text to Speech', disabled=True)
   # st.warning(' Please enter Statement!')
     
 
