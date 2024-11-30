@@ -130,35 +130,41 @@ else:
 
 
 from transformers import pipeline
-# # Load the pipeline
+import sounddevice as sd  # Import for audio playback (optional)
+
+# Load the pipeline
 tts = pipeline("text-to-speech")
 
 st.sidebar.markdown("<h3 style='text-align: center; font-size: 16px; background-color: white; color: black;'>TTS - Pipeline</h3>", unsafe_allow_html=True)
-DEFAULT_STATEMENT = ""
+
+DEFAULT_STATEMENT = "This is a sample text to be converted to speech."
 # Create a text area for user input
 STATEMENT = st.sidebar.text_area('Enter Text', DEFAULT_STATEMENT, height=150)
 
 # Enable the button only if there is text in the TTS variable
 if STATEMENT:
-    if st.sidebar.button('TTS'):
-        # Call your Summarize function here
-        #st.write('\n\n')
-
-        # Text to generate speech from
-        text = "This is a sample text to be converted to speech."
-
-        # Generate speech
-        speech = tts(text)
-
-        # Save the audio file
-        speech.save("sample_tts.wav")
-
-        st.sidebar.write('Text converted to speech')
-        #summarize_statement(STATEMENT)  # Directly pass the STATEMENT
+  if st.sidebar.button('TTS'):
+    # Text to generate speech from
+    text = STATEMENT  # Use the user input from STATEMENT
+    
+    # Generate speech
+    speech = tts(text)
+    
+    # Access the audio waveform from the dictionary (assuming key name is 'waveform')
+    audio_data = speech['waveform']
+    
+    # Optional: Save the audio to a file (uncomment if needed)
+    # sd.write(audio_data, samplerate=speech['sampling_rate'])  # Adjust samplerate if necessary
+    # with open("sample_tts.wav", "wb") as f:
+    #     f.write(audio_data)
+    
+    # Optional: Play the audio directly in Streamlit (uncomment if needed)
+    sd.play(audio_data, samplerate=speech['sampling_rate'])  # Adjust samplerate if necessary
+    
+    st.sidebar.write('Text converted to speech')
 else:
-    st.sidebar.button('TTS', disabled=True)
-    #st.warning('👈 Please enter Statement!')    
-
+  st.sidebar.button('TTS', disabled=True)
+  # st.warning(' Please enter Statement!')
     
 
 # ################ CHAT BOT - main area #################
