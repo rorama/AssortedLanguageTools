@@ -130,7 +130,7 @@ else:
 
 
 from transformers import pipeline
-import sounddevice as sd  # Import for audio playback (optional)
+# import sounddevice as sd  # Import for audio playback (optional)
 
 # Load the pipeline
 tts = pipeline("text-to-speech")
