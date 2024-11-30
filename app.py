@@ -154,12 +154,13 @@ if STATEMENT:
     audio_data = speech['waveform']
     
     # Optional: Save the audio to a file (uncomment if needed)
-    # sd.write(audio_data, samplerate=speech['sampling_rate'])  # Adjust samplerate if necessary
-    # with open("sample_tts.wav", "wb") as f:
-    #     f.write(audio_data)
+    sd.write(audio_data, samplerate=speech['sampling_rate'])  # Adjust samplerate if necessary
+    with open("sample_tts.wav", "wb") as f:
+        f.write(audio_data)
     
     # Optional: Play the audio directly in Streamlit (uncomment if needed)
-    sd.play(audio_data, samplerate=speech['sampling_rate'])  # Adjust samplerate if necessary
+      # Huggingface does not  have direct access to the generated audio data 
+    # sd.play(audio_data, samplerate=speech['sampling_rate'])  # Adjust samplerate if necessary
     
     st.sidebar.write('Text converted to speech')
 else:
