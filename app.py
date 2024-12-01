@@ -151,6 +151,10 @@ if STATEMENT:
         speech = tts(text)
         audio_data = speech['audio']
         wav_bytes = sf.write(None, audio_data, samplerate=speech['sampling_rate'], format='wav')
+
+        with open('output_tts.wav', 'wb') as f:
+            f.write(wav_bytes)
+    
         st.sidebar.download_button(
             label="Download Audio",
             data=wav_bytes,
