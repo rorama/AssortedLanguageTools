@@ -150,17 +150,22 @@ if STATEMENT:
     try:
         speech = tts(text)
         audio_data = speech['audio']
-        wav_bytes = sf.write(None, audio_data, samplerate=speech['sampling_rate'], format='wav')
+        #wav_bytes = sf.write(None, audio_data, samplerate=speech['sampling_rate'], format='wav')
 
-        with open('output_tts.wav', 'wb') as f:
-            f.write(wav_bytes)
+        wav_bytes = sf.write(None, audio_data, samplerate=speech['sampling_rate'], format='wav')
+        base64_audio = base64.b64encode(wav_bytes).decode('utf-8')
+        
+        st.sidebar.markdown(f'<a href="data:audio/wav;base64,{base64_audio}" download="generated_audio.wav">Download Audio</a>', unsafe_allow_html=True)
+        
+        # with open('output_tts.wav', 'wb') as f:
+        #     f.write(wav_bytes)
     
-        st.sidebar.download_button(
-            label="Download Audio",
-            data=wav_bytes,
-            file_name="generated_audio.wav",
-            mime="audio/wav"
-        )
+        # st.sidebar.download_button(
+        #     label="Download Audio",
+        #     data=wav_bytes,
+        #     file_name="generated_audio.wav",
+        #     mime="audio/wav"
+        # )
         st.sidebar.write('Text converted to speech (download available)')
     except Exception as e:
         st.sidebar.write(f"Error: {str(e)}")
