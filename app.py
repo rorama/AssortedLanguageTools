@@ -130,7 +130,8 @@ else:
 
 
 from transformers import pipeline
-# import sounddevice as sd  # Import for audio playback (optional)
+import soundfile as sf  # For saving audio files
+import base64  # For encoding audio data
 
 # Load the pipeline
 tts = pipeline("text-to-speech")
@@ -144,27 +145,25 @@ STATEMENT = st.sidebar.text_area('Enter Text', DEFAULT_STATEMENT, height=150)
 # Enable the button only if there is text in the TTS variable
 if STATEMENT:
   if st.sidebar.button('Convert Text to Speech'):
-    # Text to generate speech from
-    text = STATEMENT  # Use the user input from STATEMENT
-    
+    text = STATEMENT
+
     # Generate speech
     speech = tts(text)
 
-    # st.sidebar.write(speech.keys())
-      
-    # Access the audio waveform from the dictionary (assuming key name is 'waveform')
-    audio_data = speech['audio'] # speech['waveform']
-    
-    # Optional: Save the audio to a file (uncomment if needed)
-    sd.write(audio_data, samplerate=speech['sampling_rate'])  # Adjust samplerate if necessary
-    with open("sample_tts.wav", "wb") as f:
-        f.write(audio_data)
-    
-    # Optional: Play the audio directly in Streamlit (uncomment if needed)
-      # Huggingface does not  have direct access to the generated audio data 
-    # sd.play(audio_data, samplerate=speech['sampling_rate'])  # Adjust samplerate if necessary
-    
-    st.sidebar.write('Text converted to speech')
+    # Access the audio waveform from the dictionary (assuming key name is 'audio')
+    audio_data = speech['audio']
+
+    # Convert audio data to a byte array
+    wav_data = sf.write_buffer(audio_data, samplerate=speech['sampling_rate'])
+
+    # Encode the byte array to base64
+    base64_audio = base64.b64encode(wav_data).decode("utf-8")
+
+    # Generate a download link
+    download_link = f"<a href='data:audio/wav;base64,{base64_audio}'>Download Speech</a>"
+    st.sidebar.write(download_link, unsafe_allow_html=True)
+
+    st.sidebar.write('Text converted to speech (download available)')
 else:
   st.sidebar.button('Convert Text to Speech', disabled=True)
   # st.warning(' Please enter Statement!')
