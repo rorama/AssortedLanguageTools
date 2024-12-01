@@ -153,15 +153,16 @@ if STATEMENT:
     # Access the audio waveform from the dictionary (assuming key name is 'audio')
     audio_data = speech['audio']
 
-    # Convert audio data to a byte array
-    wav_data = sf.write_buffer(audio_data, samplerate=speech['sampling_rate'])
+    # Convert audio data to a bytes object
+    wav_bytes = sf.write(None, audio_data, samplerate=speech['sampling_rate'], format='wav')
 
-    # Encode the byte array to base64
-    base64_audio = base64.b64encode(wav_data).decode("utf-8")
-
-    # Generate a download link
-    download_link = f"<a href='data:audio/wav;base64,{base64_audio}'>Download Speech</a>"
-    st.sidebar.write(download_link, unsafe_allow_html=True)
+    # Create a download button for the audio file
+    st.sidebar.download_button(
+        label="Download Audio",
+        data=wav_bytes,
+        file_name="generated_audio.wav",
+        mime="audio/wav"
+    )
 
     st.sidebar.write('Text converted to speech (download available)')
 else:
