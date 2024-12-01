@@ -147,24 +147,19 @@ if STATEMENT:
   if st.sidebar.button('Convert Text to Speech'):
     text = STATEMENT
 
-    # Generate speech
-    speech = tts(text)
-
-    # Access the audio waveform from the dictionary (assuming key name is 'audio')
-    audio_data = speech['audio']
-
-    # Convert audio data to a bytes object
-    wav_bytes = sf.write(None, audio_data, samplerate=speech['sampling_rate'], format='wav')
-
-    # Create a download button for the audio file
-    st.sidebar.download_button(
-        label="Download Audio",
-        data=wav_bytes,
-        file_name="generated_audio.wav",
-        mime="audio/wav"
-    )
-
-    st.sidebar.write('Text converted to speech (download available)')
+    try:
+        speech = tts(text)
+        audio_data = speech['audio']
+        wav_bytes = sf.write(None, audio_data, samplerate=speech['sampling_rate'], format='wav')
+        st.sidebar.download_button(
+            label="Download Audio",
+            data=wav_bytes,
+            file_name="generated_audio.wav",
+            mime="audio/wav"
+        )
+        st.sidebar.write('Text converted to speech (download available)')
+    except Exception as e:
+        st.sidebar.write(f"Error: {str(e)}")
 else:
   st.sidebar.button('Convert Text to Speech', disabled=True)
   # st.warning(' Please enter Statement!')
